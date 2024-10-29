@@ -1,0 +1,47 @@
+.flex-between{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+}
+.backgroundTexture{
+    background-size:contain;
+    background-position: center;
+}
+
+.glass{
+background: rgba( 255, 255, 255, 0.3 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 9px );
+-webkit-backdrop-filter: blur( 4px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.85 );
+}
+.exploreImage {
+    border-radius: 8px;
+    transition: 0.7s ease;
+    cursor: pointer;
+  }
+  
+  .exploreImage:hover {
+    scale: 1.1;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+  }
+  
+  .shake {
+    animation: shake 0.5s;
+  }
+  
