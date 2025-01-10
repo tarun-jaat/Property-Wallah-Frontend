@@ -111,11 +111,11 @@ export const Navbar = ({ openModal, isHome = false }) => {
       </div>
 
       {(scrolled || isHome) && (
-        <div className="flex items-center space-x-4 pl-2 bg-white rounded-lg shadow-md w-full max-w-4xl">
+        <div className="flex items-center h-[70%] space-x-4 pl-2 bg-white rounded-lg shadow-md w-[45%]">
           <Button
             onClick={handlePropertyMenuClick}
             endIcon={<ExpandMoreIcon />}
-            className="text-white px-4 py-2 rounded-l-lg"
+            className="text-white px-4  rounded-l-lg"
           >
             {selectedOption}
           </Button>
@@ -132,7 +132,7 @@ export const Navbar = ({ openModal, isHome = false }) => {
                 </InputAdornment>
               ),
             }}
-            className="rounded-r-lg"
+            className="rounded-r-lg  border-none "
           />
 
           <Menu

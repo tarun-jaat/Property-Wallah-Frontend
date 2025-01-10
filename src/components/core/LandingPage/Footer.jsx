@@ -13,10 +13,8 @@ const Footer = () => {
             <div className="text-wrapper-46">Property Wallah</div>
             <div className="text-wrapper-48">Mobile Apps</div>
             <div className="text-wrapper-48">Our Services</div>
-            <div className="text-wrapper-48">Price Trends</div>
             <div className="text-wrapper-48">Post your Property</div>
             <div className="text-wrapper-48">Builders in India</div>
-            <div className="text-wrapper-48">Area Converter</div>
             <div className="text-wrapper-48">Articles</div>
             <div className="text-wrapper-48">Customer Service</div>
             <div className="text-wrapper-48">Sitemap</div>
@@ -43,19 +41,21 @@ const Footer = () => {
             <div className="text-wrapper-48">Report a problem</div>
             <div className="text-wrapper-48">Testimonials</div>
             <div className="text-wrapper-48">Privacy Policy</div>
-            <div className="text-wrapper-48">Summons/Notices</div>
-            <div className="text-wrapper-48">Grievances</div>
-            <div className="text-wrapper-48">Safety Guide</div>
+          
           </div>
 
           <div className="list">
             <div className="text-wrapper-46">Our Partners</div>
             <div className="div-wrapper-2a">
-              <a href="https://www.naukri.com/" target="_blank">
-                <p className="text-wrapper-48">Naukri.com - Jobs in India</p>
+              <a href="https://www.vigya.in/" target="_blank">
+                <p className="text-wrapper-48">Vigya.in - For IT Services And Solutions</p>
+              </a>
+            </div><div className="div-wrapper-2a">
+              <a href="https://www.aanganconnect.in/" target="_blank">
+                <p className="text-wrapper-48">Aangan Connect - For Your Smart Society</p>
               </a>
             </div>
-            <div className="div-wrapper-2">
+            {/* <div className="div-wrapper-2">
               <a href="https://www.naukrigulf.com/" target="_blank">
                 <p className="text-wrapper-51">
                   Naukrigulf.com - Jobs in
@@ -146,7 +146,7 @@ const Footer = () => {
                   on the go
                 </p>
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
 

@@ -6,6 +6,7 @@ import BossBenefits from "../components/core/Plans/Benefits";
 import ListingPack from "../components/core/Plans/ListingPack";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import "../styles/animations.css"; // Make sure to create this CSS file for animations
+import { useLocation } from "react-router-dom";
 
 const Plans = [
   {
@@ -62,16 +63,18 @@ const Plans = [
   }  
 ];
 
-function PlansScreen() {
+function PlansScreen({ selectedRoleProp }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedRole, setSelectedRole] = useState("Broker");
+  const [selectedRole, setSelectedRole] = useState(selectedRoleProp || "Broker");
+  const location = useLocation();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsModalOpen(true);
-    }, 40000);
-    return () => clearTimeout(timer);
-  }, []);
+    const params = new URLSearchParams(location.search);
+    const role = params.get("selectedPlanType");
+    if (role) {
+      setSelectedRole(role.charAt(0).toUpperCase() + role.slice(1));
+    }
+  }, [location]);
 
   return (
     <div className="h-screen flex flex-col bg-gray-100">
