@@ -19,7 +19,9 @@ import { logout } from "../../Services/Operations/AuthServices";
 import { LocationOnTwoTone, Logout } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { openSearchModal } from "../../Redux/SearchModalSlice";
-export const Navbar = () => {
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import SideMenu from "./SideMenu";
+export const Navbar = ({ openModal, isHome = false }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
@@ -29,7 +31,17 @@ export const Navbar = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const { pwUser } = useSelector((state) => state.profile);
   const { selectedCity } = useSelector((state) => state.selectedCity);
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
+  const handleSideMenuClose = () => {
+    setIsSideMenuOpen(false);
+  };
+
+  const handleSideMenuToggle = () => {
+    setIsSideMenuOpen((prev) => !prev);
+  };
+
+  
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 300);
@@ -79,11 +91,16 @@ export const Navbar = () => {
   return (
     <div
       className={`flex-between fixed transition-all z-50 w-full ease-in-out px-3 duration-300 h-16 ${
-        scrolled ? "bg-blue-500" : "bg-transparent"
+        scrolled || isHome ? "bg-blue-500" : "bg-transparent"
       }`}
     >
       <div className="flex gap-6 items-end justify-center text-white">
-        <img src={Logo} className=" cursor-pointer" alt="Logo" />
+        <img
+          src={Logo}
+          className="cursor-pointer"
+          alt="Logo"
+          onClick={() => navigate('/')}
+        />
         <p
           onClick={() => dispatch(openSearchModal())}
           className=" cursor-pointer pb-2 font-bold"
@@ -93,7 +110,7 @@ export const Navbar = () => {
         </p>
       </div>
 
-      {scrolled && (
+      {(scrolled || isHome) && (
         <div className="flex items-center space-x-4 pl-2 bg-white rounded-lg shadow-md w-full max-w-4xl">
           <Button
             onClick={handlePropertyMenuClick}
@@ -141,14 +158,16 @@ export const Navbar = () => {
         <Button
           disableRipple
           variant="contained"
+          onClick={() => navigate('/post-property')} // Fix: Wrap in an arrow function
           sx={{
             textTransform: "none",
             mr: 2,
             background: "#fff",
             color: "#000",
-            borderRadius: "10px",
+            borderRadius: "8px",
+            fontSize: "12px",
             fontWeight: 600,
-            p: "3px 16px",
+            p: "4px 16px",
             ":hover": {
               background: "#fff",
               color: "#000",
@@ -247,9 +266,19 @@ export const Navbar = () => {
             </MenuItem>
           )}
         </Menu>
-        <Menu>
-          
-        </Menu>
+        
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit" 
+          aria-label="menu"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          onClick={handleSideMenuToggle} 
+        >
+          <MenuOpenIcon style={{ color: "#ffffff" }} /> 
+        </IconButton>
+        <SideMenu open={isSideMenuOpen} onClose={handleSideMenuClose} /> 
 
         {scrolled && (
           <div
@@ -260,6 +289,7 @@ export const Navbar = () => {
             <ArrowCircleUp/>
           </div>
         )}
+
         <LoginModal open={isLoginModalOpen} handleClose={closeLoginModal} />
       </div>
     </div>

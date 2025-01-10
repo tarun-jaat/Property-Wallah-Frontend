@@ -8,7 +8,7 @@ const SearchModalSlice = createSlice({
   name: "searchModal",
   initialState,
   reducers: {
-    openSearchModal: (state) => {
+    openSearchModal: (state) => { 
       state.open = true;
     },
     closeSearchModal: (state) => {

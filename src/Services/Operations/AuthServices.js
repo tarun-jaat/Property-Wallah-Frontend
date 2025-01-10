@@ -1,7 +1,7 @@
 import { toast } from "react-hot-toast";
 import { apiConnector } from "../ApiConnector";
 import { setPwUser } from "../../Redux/Profile"; 
-import { setLoading, setPwtoken } from "../../Redux/Auth"; 
+import { setLoading, settoken } from "../../Redux/Auth"; 
 import { AUTH_API } from "../Apis";
 
 const { SendOtp, VerifyOtp } = AUTH_API;
@@ -11,9 +11,10 @@ export function sendOtp(email) {
     const toastId = toast.loading("Loading...");
     dispatch(setLoading(true));
     try {
-      const response = await apiConnector("POST", SendOtp, {
-        email,
-        checkUserPresent: true,
+      const response = await apiConnector({
+        method: "POST",
+        url: SendOtp,
+        data: { email, checkUserPresent: true },
       });
       console.log("SENDOTP API RESPONSE............", response);
 
@@ -36,9 +37,10 @@ export function verifyOtp(email, otp) {
     const toastId = toast.loading("Loading...");
     dispatch(setLoading(true));
     try {
-      const response = await apiConnector("POST", VerifyOtp, {
-        email,
-        otp,
+      const response = await apiConnector({
+        method: "POST",
+        url: VerifyOtp,
+        data: { email, otp },
       });
       console.log("VERIFYOTP API RESPONSE............", response);
 
@@ -47,11 +49,11 @@ export function verifyOtp(email, otp) {
       }
 
       localStorage.setItem("pwUser", JSON.stringify(response.data.user));
-      localStorage.setItem("Pwtoken", JSON.stringify(response.data.token));
+      localStorage.setItem("token", JSON.stringify(response.data.token));
 
       toast.success("OTP Verified Successfully");
       dispatch(setPwUser(response.data.user)); 
-      dispatch(setPwtoken(response.data.token)); 
+      dispatch(settoken(response.data.token)); 
     } catch (error) {
       console.log("VERIFYOTP API ERROR............", error);
       toast.error("Invalid OTP");
@@ -64,11 +66,9 @@ export function verifyOtp(email, otp) {
 export function logout(navigate) {
   return (dispatch) => {
     localStorage.removeItem("pwUser");
-    localStorage.removeItem("Pwtoken");
-
-    dispatch(setPwtoken(null)); 
+    localStorage.removeItem("token");
+    dispatch(settoken(null)); 
     dispatch(setPwUser(null)); 
-
     toast.success("Logged Out");
     navigate("/");
   };

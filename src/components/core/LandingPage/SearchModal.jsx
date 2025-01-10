@@ -9,7 +9,7 @@ import { closeSearchModal } from "../../../Redux/SearchModalSlice";
 import { Button, Divider, TextField } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
 import { setSelectedCity } from "../../../Redux/SelectedCity";
-import data from '../../../data/Cities.json';
+import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -27,19 +27,25 @@ const optionButtons = ["Buy", "Rent / Lease", "Plots/Land", "PG / Co-living"];
 
 export default function SearchModal() {
   const { open } = useSelector((store) => store.searchModal);
+  const { properties } = useSelector((state) => state.properties);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleClose = () => dispatch(closeSearchModal());
 
-  const [suggestions, setSuggestions] = useState([]); 
-  const [searchOption, setSearchOption] = useState(optionButtons[0]); 
-  const [city, setCity] = useState(""); 
+  const [suggestions, setSuggestions] = useState([]);
+  const [searchOption, setSearchOption] = useState(optionButtons[0]);
+  const [city, setCity] = useState("");
 
-  // Fetching city suggestions
   useEffect(() => {
-    if (data && data.states) {
-      setSuggestions(data.states);
+    if (properties && properties.length > 0) {
+      // Extract unique cities from properties
+      const uniqueCities = [
+        ...new Set(properties.map((property) => property.location.state)),
+      ];
+      setSuggestions(uniqueCities);
     }
-  }, []);
+  }, [properties]); // Trigger when properties change
 
   return (
     <div>
@@ -72,7 +78,7 @@ export default function SearchModal() {
               {optionButtons.map((btn, index) => (
                 <Button
                   key={index}
-                  onClick={() => setSearchOption(btn)} 
+                  onClick={() => setSearchOption(btn)}
                   disableRipple
                   sx={{
                     textTransform: "capitalize",
@@ -125,11 +131,12 @@ export default function SearchModal() {
                   if (newValue) {
                     dispatch(setSelectedCity(newValue));
                   }
-                }}  
+                }}
                 id="free-solo-with-text-demo"
-                options={suggestions.map((item) => item.name)} // Extract city names
+                options={suggestions}
                 sx={{ width: "70%" }}
                 freeSolo
+                noOptionsText="No city found" 
                 renderInput={(params) => (
                   <TextField
                     {...params}
@@ -139,6 +146,7 @@ export default function SearchModal() {
                   />
                 )}
               />
+
               <Divider
                 orientation="vertical"
                 sx={{ background: "rgba(0,0,0,0.08)", ml: 2 }}
@@ -150,6 +158,7 @@ export default function SearchModal() {
                     textTransform: "capitalize",
                     fontWeight: 700,
                   }}
+                  onClick={() => navigate('/properties')}
                 >
                   Explore
                 </Button>

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   signupData: null,
   loading: false,
-  Pwtoken: localStorage.getItem("Pwtoken") ? JSON.parse(localStorage.getItem("Pwtoken")) : null, 
+  token: localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null, 
 };
 
 const authSlice = createSlice({
@@ -16,12 +16,14 @@ const authSlice = createSlice({
     setLoading(state, action) {
       state.loading = action.payload;
     },
-    setPwtoken(state, action) {  
-      state.Pwtoken = action.payload; 
+    settoken(state, action) {  
+      state.token = action.payload; 
     },
   },
 });
 
-export const { setSignupData, setLoading, setPwtoken } = authSlice.actions; 
+export const { setSignupData, setLoading, settoken } = authSlice.actions; 
+
+export const selectIsAuthenticated = (state) => !!state.auth.token;
 
 export default authSlice.reducer;

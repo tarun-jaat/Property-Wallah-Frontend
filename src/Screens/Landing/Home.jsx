@@ -12,6 +12,11 @@ import PropertySection from "../../components/core/LandingPage/BHKSSection";
 import BottomSection from "../../components/core/LandingPage/PopularCities";
 import Footer from "../../components/core/LandingPage/Footer";
 import { useSelector } from "react-redux";
+import UpcomingProjects from "../../components/core/LandingPage/UpcomingProjects";
+import NewlyLaunchedProjects from "../../components/core/LandingPage/NewlyLaunchedProjects";
+import PopularLocalities from "../../components/core/LandingPage/PopularLocalities";
+import PropertyInsights from "../../components/core/LandingPage/PropertInsights";
+import HandedProject from "../../components/core/LandingPage/HandedProject";
 function Home() {
   const { pwUser } = useSelector((state) => state.profile);
 
@@ -44,19 +49,27 @@ function Home() {
       </Box>
       <GetStarted />
       <div className="mt-12 relative pt-7 w-full flex items-center justify-center bg-white">
-        <Recommend />
+        {pwUser ? (
+          <div className="flex flex-col w-full">
+            <HandedProject />
+            <UpcomingProjects />{" "}
+          </div>
+        ) : (
+          <Recommend />
+        )}
       </div>
+      <PropertyInsights />
       <div className="mt-4 pt-7 w-full overflow-hidden flex items-center justify-center backgroundTexture">
         <HomesByFurnishing />
       </div>
       <div className="mt-4 pt-7 overflow-hidden flex items-center justify-center backgroundTexture">
-       { pwUser ?(null):(<MiddleSection />
-       )} 
+        {pwUser ? <NewlyLaunchedProjects /> : <MiddleSection />}
       </div>
       <div className="mt-4 pt-7 overflow-hidden flex items-center justify-center backgroundTexture">
         <PropertySection />
       </div>
-      <BottomSection />
+      <PopularLocalities />
+       <BottomSection />
       <Footer />
     </div>
   );

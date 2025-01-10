@@ -1,13 +1,18 @@
 import { Box, Breadcrumbs, Container, Grid, Link } from "@mui/material";
 import React from "react";
-import {Navbar} from '../../components/common/Navbar';
+import {Navbar} from '../../../components/common/Navbar';
 import { useNavigate } from "react-router";
-import {FiltersSection,PropertiesListSection} from '../../components/core/PropertiesPage';
 import PropTypes from "prop-types";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Fab from "@mui/material/Fab";
 import Fade from "@mui/material/Fade";
 import StraightSharpIcon from "@mui/icons-material/StraightSharp";
+import PropertiesListSection from "./PropertiesListSection";
+import FiltersSection from "../../../components/core/PropertyListing/FilterSection";
+import Footer from "../../../components/core/LandingPage/Footer";
+
+
+
 
 function ScrollTop(props) {
   const { children, window } = props;
@@ -90,7 +95,7 @@ const Properties = (props) => {
   return (
     <>
       <Box sx={{ background: "#f4f5f7", minHeight: "100vh" }}>
-        <Navbar isHome={false} openModal={() => navigate("/")} />
+        <Navbar isHome={true} openModal={() => navigate("/")} />
         <Container sx={{ paddingTop: 0.5 }}>
           <Breadcrumbs
             id="back-to-top-anchor"
@@ -100,13 +105,15 @@ const Properties = (props) => {
           >
             {breadcrumbs}
           </Breadcrumbs>
-          <Grid container spacing={2} sx={{ mt: 0 }}>
-            <Grid item md={3.5}>
-              <FiltersSection />
+          <Grid container sx={{position:"relative"}} spacing={2}>
+            <Grid item md={3.5} >
+               <FiltersSection /> 
             </Grid>
-            <Grid item md={0.2}></Grid>
-            <Grid item md={8.3}>
-              <PropertiesListSection />
+            {/* <Grid item md={0.2}>
+              
+            </Grid> */}
+            <Grid item md={8.5} >
+              <PropertiesListSection/>
             </Grid>
           </Grid>
         </Container>
@@ -126,6 +133,7 @@ const Properties = (props) => {
           <StraightSharpIcon sx={{ color: "#0078db", fontSize: "20px" }} />
         </Fab>
       </ScrollTop>
+      <Footer/>
     </>
   );
 };

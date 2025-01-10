@@ -4,6 +4,9 @@ import { ArrowForward } from "@mui/icons-material";
 
 const PropertySection = () => {
   const bhkOptions = [
+    { type: "1 RK", value: 10 },
+    { type: "1 BHK", properties: 4 },
+    { type: "2 BHK", properties: 4 },
     { type: "3 BHK", properties: 4 },
     { type: "4 BHK", properties: 4 },
     { type: "4+ BHK", properties: 1 },
@@ -28,10 +31,10 @@ const PropertySection = () => {
             </Typography>
           </div>
         </div>
-        <Grid container spacing={3}>
+        <Grid container spacing={2}>
           {bhkOptions.map((bhk, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Card sx={{borderRadius:'30px'}} className="hover:shadow-lg w-[250px] h-[200px] transition-shadow">
+            <Grid item xs={12} sm={12} md={3} key={index}>
+              <Card sx={{borderRadius:'30px'}} className="hover:shadow-lg w-[200px] h-[200px] transition-shadow">
                 <CardContent className="text-center p-6">
                   <div className="flex justify-center mb-4">
                     <div className=" p-4 rounded-full">
