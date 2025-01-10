@@ -1,4 +1,4 @@
-const BASE_URL = typeof process !== 'undefined' ? process.env.REACT_APP_BASE_URL : 'http://localhost:9002/api/v1';
+const BASE_URL = typeof process !== 'undefined' ? process.env.REACT_APP_BASE_URL : 'https://api.propertywallah.org/api/v1';
 
 export const AUTH_API = {
   SendOtp: `${BASE_URL}/user/send-otp`,
