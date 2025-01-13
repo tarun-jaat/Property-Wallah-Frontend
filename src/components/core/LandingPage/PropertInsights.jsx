@@ -74,8 +74,8 @@ export default function PropertyInsights() {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 bg-gray-50 mb-36 mt-10">
-      <div className="h-[20rem] rounded-lg bg-blue-100 mx-auto w-3/4">
+    <div className="grid grid-cols-1 bg-gray-50 mb-36 mt-10 mx-auto w-full md:w-3/4">
+      <div className="h-[20rem] rounded-lg bg-blue-100 mx-auto w-[90%]">
         <div className="flex justify-between p-6 mt-16">
           <div className="flex items-center ">
             <img
@@ -88,9 +88,9 @@ export default function PropertyInsights() {
               <p className="text-gray-500">Go From browsing to buying</p>
             </div>
           </div>
-          <Button className="bg-transparent text-blue-500 font-extrabold border  border-blue-500 rounded px-4 py-2 hover:bg-blue-500 hover:text-white transition">
+          {/* <Button className="bg-transparent text-blue-500 font-extrabold border  border-blue-500 rounded px-4 py-2 hover:bg-blue-500 hover:text-white transition">
             View All Insights
-          </Button>
+          </Button> */}
         </div>
 
         {/* Slider Section */}

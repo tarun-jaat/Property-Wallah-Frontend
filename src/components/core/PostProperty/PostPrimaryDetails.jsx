@@ -9,6 +9,9 @@ export default function PostPrimaryDetails() {
   const [mobileNumber, setMobileNumber] = useState("");
   const [showError, setShowError] = useState(false);
   const { step } = useSelector((state) => state.formData);
+    const { pwUser } = useSelector((state) => state.profile);
+    console.log(pwUser);
+  
   const currentStep = step;
 
   const dispatch = useDispatch();
@@ -24,7 +27,7 @@ export default function PostPrimaryDetails() {
   };
 
   return (
-    <div className="min-h-screen mt-24 p-4 md:p-6 lg:p-8 bg-gray-50">
+    <div className="min-h-screen w-full mt-24 p-4 md:p-6 lg:p-8 bg-gray-50">
       <div className="mx-auto max-w-6xl bg-white rounded-lg shadow-lg p-6">
         <div className="grid md:grid-cols-[300px,1fr] gap-8">
           {/* Progress Sidebar */}
@@ -59,7 +62,7 @@ export default function PostPrimaryDetails() {
           {/* Main Content */}
           <div className="space-y-8">
             <div>
-              <h1 className="text-2xl font-semibold text-gray-900">Welcome back, Aditya</h1>
+              <h1 className="text-2xl font-semibold text-gray-900">Welcome back,{pwUser.name}</h1>
               <p className="text-lg text-gray-600">Fill out the basic details</p>
             </div>
 
@@ -118,13 +121,13 @@ export default function PostPrimaryDetails() {
         <div className="mt-8 text-right text-sm text-gray-600">
           <p>Need help?</p>
           <p>
-            Email us at <a href="mailto:services@99acres.com" className="text-blue-600">services@99acres.com</a>
+            Email us at <a href="mailto:bahadurdangi100@gmail.com " className="text-blue-600">bahadurdangi100@gmail.com </a>
           </p>
           <p>
-            Call us at <a href="tel:1800419999" className="text-blue-600">1800 41 9999</a> (IND Toll-Free)
+            Call us at <a href="tel:+919664265932" className="text-blue-600">+919664265932</a> (IND)
           </p>
         </div>
-      </div>
+      </div> 
     </div>
   );
 }

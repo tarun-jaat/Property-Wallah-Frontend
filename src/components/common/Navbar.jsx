@@ -90,20 +90,20 @@ export const Navbar = ({ openModal, isHome = false }) => {
 
   return (
     <div
-      className={`flex-between fixed transition-all z-50 w-full ease-in-out px-3 duration-300 h-16 ${
+      className={`flex-between fixed transition-all z-50 md:w-full w-auto ease-in-out px-3 duration-300 h-16 ${
         scrolled || isHome ? "bg-blue-500" : "bg-transparent"
       }`}
     >
-      <div className="flex gap-6 items-end justify-center text-white">
+      <div className="flex gap-6 flex-wrap items-end justify-center text-white">
         <img
           src={Logo}
-          className="cursor-pointer"
+          className="cursor-pointer h-10"
           alt="Logo"
           onClick={() => navigate('/')}
         />
         <p
           onClick={() => dispatch(openSearchModal())}
-          className=" cursor-pointer pb-2 font-bold"
+          className=" cursor-pointer md:block hidden pb-2 font-bold"
         >
           {selectedCity}
           <LocationOnTwoTone />
@@ -132,8 +132,8 @@ export const Navbar = ({ openModal, isHome = false }) => {
                 </InputAdornment>
               ),
             }}
-            className="rounded-r-lg  border-none "
-          />
+            className="rounded-r-lg border-none hidden md:block" 
+            />
 
           <Menu
             anchorEl={propertyMenuAnchorEl}
@@ -155,42 +155,17 @@ export const Navbar = ({ openModal, isHome = false }) => {
       )}
 
       <div className="flex items-center gap-3">
-        <Button
-          disableRipple
-          variant="contained"
-          onClick={() => navigate('/post-property')} // Fix: Wrap in an arrow function
-          sx={{
-            textTransform: "none",
-            mr: 2,
-            background: "#fff",
-            color: "#000",
-            borderRadius: "8px",
-            fontSize: "12px",
-            fontWeight: 600,
-            p: "4px 16px",
-            ":hover": {
-              background: "#fff",
-              color: "#000",
-            },
-          }}
-        >
-          Post property
-          <Chip
-            color="success"
-            size="small"
-            label="Free"
-            sx={{
-              ml: 1,
-              borderRadius: "4px",
-              p: 0,
-              textTransform: "uppercase",
-              fontSize: "10px",
-              height: "17px",
-              display: "flex",
-              alignItems: "center",
-            }}
-          />
-        </Button>
+      <button
+      className="text-[8px] md:text-[14px] py-2 px-1 bg-white text-black font-semibold rounded-lg hover:bg-white hover:text-black flex items-center"
+      onClick={() => navigate('/post-property')}
+    >
+      Post property
+      <span
+        className="ml-1 text-[8px] uppercase font-semibold bg-green-cool-vivid-400 text-white rounded px-2 py-0.5"
+      >
+        Free
+      </span>
+    </button>
 
         {pwUser ? (
           <img

@@ -382,16 +382,16 @@ export default function AmenitiesSection() {
           <p>Need help?</p>
           <p>
             You can email us at{' '}
-            <a href="mailto:services@99acres.com" className="text-blue-600">
-              services@99acres.com
+            <a href="mailto:bahadurdangi100@gmail.com " className="text-blue-600">
+            bahadurdangi100@gmail.com 
             </a>
           </p>
           <p>
             or call us at{' '}
-            <a href="tel:1800419999" className="text-blue-600">
-              1800 41 9999
+            <a href="tel:+919664265932" className="text-blue-600">
+            +919664265932 
             </a>{' '}
-            (IND Toll-Free)
+            (IND)
           </p>
         </div>
       </div>

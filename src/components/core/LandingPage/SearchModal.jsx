@@ -21,6 +21,19 @@ const style = {
   boxShadow: 24,
   p: 4,
   borderRadius: 2,
+  // Responsive design
+  '@media (max-width: 1024px)': {
+    width: '90%',
+    height: 'auto',
+    top: '10%',
+    left: '5%',
+  },
+  '@media (max-width: 600px)': {
+    width: '100%',
+    height: 'auto',
+    top: '5%',
+    left: '0',
+  },
 };
 
 const optionButtons = ["Buy", "Rent / Lease", "Plots/Land", "PG / Co-living"];
@@ -35,7 +48,7 @@ export default function SearchModal() {
 
   const [suggestions, setSuggestions] = useState([]);
   const [searchOption, setSearchOption] = useState(optionButtons[0]);
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("All World");
 
   useEffect(() => {
     if (properties && properties.length > 0) {
@@ -67,14 +80,15 @@ export default function SearchModal() {
             <Typography
               sx={{
                 color: "#041533",
-                fontSize: "32px",
                 fontWeight: 700,
                 lineHeight: "48px",
+                fontSize: { xs: "24px", md: "32px" }, // Responsive typography
               }}
+              className="md:text-2xl font-bold"
             >
               Explore real estate in...
             </Typography>
-            <Box sx={{ display: "flex", mt: 4, gap: 3 }}>
+            <Box sx={{ overflowY: "auto", display: "flex", mt: 4, gap: 3,minWidth:300 }}>
               {optionButtons.map((btn, index) => (
                 <Button
                   key={index}
@@ -102,11 +116,13 @@ export default function SearchModal() {
             </Box>
             <Box
               sx={{
-                display: "flex",
-                alignItems: "center",
+
                 boxShadow: "0 3px 8px 0 rgba(0,106,194,0.2)",
                 borderRadius: 1,
+                mt: 3,
+                // flexWrap: "wrap",
               }}
+              className="flex md:flex-row flex-col"
             >
               <Box sx={{ p: "13px 10px 13px 13px" }}>
                 <Typography
@@ -134,19 +150,23 @@ export default function SearchModal() {
                 }}
                 id="free-solo-with-text-demo"
                 options={suggestions}
-                sx={{ width: "70%" }}
+                sx={{ width: { xs: "100%", sm: "70%" } }} // Make Autocomplete field responsive
                 freeSolo
-                noOptionsText="No city found" 
+                noOptionsText="No city found"
                 renderInput={(params) => (
                   <TextField
                     {...params}
                     variant="standard"
-                    sx={{ ml: 2, width: "95%", fontFamily: "Open Sans" }}
+                    sx={{
+                      ml: 2,
+                      width: "95%",
+                      fontFamily: "Open Sans",
+                      fontSize: { xs: "12px", sm: "14px" },
+                    }}
                     placeholder='Search City (e.g., "Noida")'
                   />
                 )}
               />
-
               <Divider
                 orientation="vertical"
                 sx={{ background: "rgba(0,0,0,0.08)", ml: 2 }}
@@ -157,6 +177,7 @@ export default function SearchModal() {
                   sx={{
                     textTransform: "capitalize",
                     fontWeight: 700,
+                    width: { xs: "100%", sm: "auto" }, // Make button width responsive
                   }}
                   onClick={() => navigate('/properties')}
                 >

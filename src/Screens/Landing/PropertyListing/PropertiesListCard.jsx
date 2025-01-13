@@ -85,12 +85,12 @@ const PropertiesListCard = ({ property }) => {
         sx={{
           mt: 2,
           p: 2,
-          display: "flex",
           gap: 2,
           borderRadius: 2,
           boxShadow: "0 3px 8px rgba(0, 0, 0, 0.1)",
           position: "relative",
         }}
+        className="md:flex"
       >
         {/* Left Section: Property Image */}
         <Box sx={{ flex: "0 0 300px", position: "relative" }}>

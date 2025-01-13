@@ -13,7 +13,7 @@ const PropertySection = () => {
   ];
 
   return (
-    <div className="p-6 w-[75%] bg-yellow-50">
+    <div className="p-6 md:w-[75%] bg-yellow-50">
       <div className="mb-8 bg-[#fff5e4] rounded-2xl p-4">
         <div className="flex items-center space-x-4 mb-4">
           <div className="bg-orange-100 p-4 rounded-full">
@@ -59,7 +59,7 @@ const PropertySection = () => {
         </Grid>
       </div>
 
-      <div className="mb-8 bg-[#fff5e4] flex py-10 gap-4 justify-between rounded-2xl p-4">
+      <div className="mb-8 bg-[#fff5e4] md:flex-row flex-col flex py-10 gap-4 justify-between rounded-2xl p-4">
         <div className="flex items-center space-x-4 mb-4">
           <div className=" p-4 rounded-full">
             <img
@@ -78,7 +78,7 @@ const PropertySection = () => {
             </Typography>
           </div>
         </div>
-        <Card sx={{borderRadius:'30px'}} className="hover:shadow-lg flex transition-shadow w-[50%] h-full p-4">
+        <div  className="hover:shadow-lg flex md:flex-row flex-col transition-shadow md:w-[50%] h-full p-4">
           <img src="https://cdn3.iconfinder.com/data/icons/classic-multiple-user-4/32/multiple_user_home_classic_tritone_f-512.png" height={50} width={100} alt="" />
           <CardContent className="flex justify-between flex-col p-6">
             <h1 className="text-xl font-bold"> Choose type of advertiser</h1>
@@ -97,7 +97,7 @@ const PropertySection = () => {
               </span>
             </div>
           </CardContent>
-        </Card>
+        </div>
       </div>
     </div>
   );

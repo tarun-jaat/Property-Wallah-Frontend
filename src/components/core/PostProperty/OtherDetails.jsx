@@ -1,24 +1,25 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Check, X } from 'lucide-react'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Check, X } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetStep, saveFormData, resetForm } from '../../../Redux/FormDataSlice.js';
+import { resetStep, saveFormData, resetForm, incrementStep } from '../../../Redux/FormDataSlice.js';
 import { createProperty } from '../../../Services/Operations/PropertyServices.js';
+import toast from 'react-hot-toast';
 
 export default function OtherDetails() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const formData = useSelector((state) => state.formData);
   const dispatch = useDispatch();
 
-  
   const [features, setFeatures] = useState({
     feature1: 'East Facing',
     feature2: 'Close to Metro Station',
     feature3: 'Fresh Construction',
     feature4: 'Gated Society'
-  })
+  });
+
   const featureOptions = [
-    'East Facing',
+    'East Facing', 
     'North Facing',
     'South Facing',
     'North-East Facing',
@@ -27,31 +28,31 @@ export default function OtherDetails() {
     'Corner Property',
     'Overlook Park/Garden',
     'Close to Metro Station'
-  ]
+  ];
 
   const handleFeatureChange = (featureKey, value) => {
     setFeatures(prev => ({
       ...prev,
       [featureKey]: value
-    }))
-  }
+    }));
+  };
 
   const handleSkip = () => {
     dispatch(incrementStep());
-  }
+  };
 
   const handleConfirm = () => {
     dispatch(saveFormData({ features }));
     dispatch(resetStep());
+    toast.success('Property posted successfully');
     navigate('/');
-    console.log(formData);
     dispatch(createProperty(formData));
     dispatch(resetForm());
-  }
+  };
 
   const handleCancel = () => {
     dispatch(resetForm());
-  };  
+  };
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
@@ -140,6 +141,6 @@ export default function OtherDetails() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 

@@ -91,11 +91,12 @@ export default function PostPropertyRegister() {
         </p>
         <div className="text-sm text-gray-500 space-y-2">
           <p>Need help?</p>
-          <p>You can email us at <a href="mailto:services@99acres.com" className="text-blue-600">services@99acres.com</a></p>
-          <p>or call us at <span className="text-blue-600">1800 41 99099</span> (IND Toll-Free)</p>
+          <p>You can email us at <a href="mailto:bahadurdangi100@gmail.com " className="text-blue-600">bahadurdangi100@gmail.com</a></p>
+          <p>or call us at <span className="text-blue-600">+919664265932</span> (IND)</p>
         </div>
       </div>
     </div>
   );
 }
 
+ 

@@ -1,11 +1,6 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import React from "react";
-import DarkTypography from "../../common/DarkTypography";
-import LightTypography from "../../common/LightTypography";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { useDispatch } from "react-redux";
-import { openSearchModal } from "../../../Redux/SearchModalSlice";
+import Carousel from "react-multi-carousel";
 
 const citiesList = [
   {
@@ -39,152 +34,58 @@ const citiesList = [
   },
 ];
 
-const Card = ({ src, text1, text2 }) => {
-  const dispatch = useDispatch();
-  return (
-    <Box
-      onClick={() => dispatch(openSearchModal())}
-      sx={{ display: "flex", alignItems: "center", mb: 2, cursor: "pointer" }}
-    >
-      <img
-        src={src}
-        alt="citiesImage"
-        style={{
-          width: "100px",
-          height: "98px",
-          objectFit: "cover",
-          borderRadius: "8px",
-        }}
-      />
-      <Box>
-        <Typography
-          sx={{
-            mt: 1,
-            ml: 3,
-            color: "#041533",
-            fontSize: "16px",
-            fontWeight: 700,
-            lineHeight: "24px",
-                      }}
-        >
-          {text1}
-        </Typography>
-        <Typography
-          sx={{
-            mt: 1,
-            ml: 3,
-            color: "#8993A4",
-            fontSize: "14px",
-            fontWeight: 600,
-            lineHeight: "20px",
-                      }}
-        >
-          {text2}
-        </Typography>
-      </Box>
-    </Box>
-  );
-};
+const Card = ({ src, title, subtitle }) => (
+  <div
+    className="flex items-center mb-4 cursor-pointer bg-white  rounded-lg p-4 transition-transform transform hover:scale-105"
+    onClick={() => console.log("Open Search Modal")}
+  >
+    <img
+      src={src}
+      alt="city"
+      className="w-24 h-24 object-cover rounded-lg"
+    />
+    <div className="ml-4">
+      <h3 className="text-lg font-bold text-gray-900">{title}</h3>
+      <p className="text-sm text-gray-500">{subtitle}</p>
+    </div>
+  </div>
+);
 
 const CommercialCard = ({
   bgColor,
   lightText,
-  titleText1,
-  titleText2,
-  subline1,
-  subline2,
+  title1,
+  title2,
+  subtitle1,
+  subtitle2,
   btnText,
-}) => {
-  const dispatch = useDispatch();
-
-  return (
-    <Box
-      onClick={() => dispatch(openSearchModal())}
-      sx={{
-        minWidth: "512px",
-        minHeight: "450px",
-        borderRadius: "8px",
-        background: bgColor,
-        cursor: "pointer",
-      }}
+}) => (
+  <div
+    className={`p-8 rounded-lg cursor-pointer ${bgColor} shadow-md transition-transform transform hover:scale-105`}
+    onClick={() => console.log("Open Search Modal")}
+  >
+    <p className="text-sm text-gray-600">{lightText}</p>
+    <h2 className="text-2xl font-bold text-gray-900 mt-2">
+      {title1} <br /> {title2}
+    </h2>
+    <p className="text-gray-700 mt-2">
+      {subtitle1}
+      <br /> {subtitle2}
+    </p>
+    <button
+      className="mt-4 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
     >
-      <Box sx={{ padding: "80px 64px" }}>
-        <LightTypography text={lightText} fontSize="14px" />
-        <Typography
-          sx={{
-            mt: 1,
-            color: "#041533",
-            fontSize: "32px",
-            fontWeight: 700,
-            lineHeight: "48px",
-                      }}
-        >
-          {titleText1} <br /> {titleText2}
-        </Typography>
-        <Typography
-          sx={{
-            mt: 1,
-            color: "#253858",
-            fontSize: "16px",
-            fontWeight: 400,
-            lineHeight: "24px",
-                      }}
-        >
-          {subline1}
-          <br /> {subline2}
-        </Typography>
-        <Button
-          onClick={() => dispatch(openSearchModal())}
-          disableRipple
-          sx={{
-            mt: 3,
-            background: "#0078DB",
-            padding: "16px 24px",
-            fontSize: "16px",
-            lineHeight: "20px",
-            fontWeight: 700,
-            color: "#fff",
-                        textTransform: "capitalize",
-            ":hover": {
-              background: "#006AC2",
-            },
-          }}
-        >
-          {btnText}
-        </Button>
-      </Box>
-    </Box>
-  );
-};
+      {btnText}
+    </button>
+  </div>
+);
 
-const WhyChoose = ({ text1, text2 }) => {
-  return (
-    <Box>
-      <Typography
-        sx={{
-          mt: 1,
-          color: "#041533",
-          fontSize: "20px",
-          fontWeight: 600,
-          lineHeight: "28px",
-                  }}
-      >
-        {text1}
-      </Typography>
-      <Typography
-        sx={{
-          mt: 1,
-          color: "#8993A4",
-          fontSize: "16px",
-          fontWeight: 400,
-          lineHeight: "24px",
-                  }}
-      >
-        {text2}
-      </Typography>
-    </Box>
-  );
-};
+const WhyChoose = ({ title, subtitle }) => (
+  <div className="p-4 bg-white shadow-md rounded-lg text-center">
+    <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+    <p className="text-gray-500 mt-2">{subtitle}</p>
+  </div>
+);
 
 const BottomSection = () => {
   const responsive = {
@@ -194,7 +95,7 @@ const BottomSection = () => {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3.5,
+      items: 3,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
@@ -207,103 +108,70 @@ const BottomSection = () => {
   };
 
   return (
-    <Container
-      sx={{
-        mb: 5,
-      }}
-    >
-      <Box sx={{ mb: 4 }}>
-        <LightTypography text={"TOP CITIES"} />
-        <DarkTypography
-          text1={"Explore Real Estate in Popular Indian Cities"}
-          textAlign="left"
-        />
-      </Box>
-      <Carousel responsive={responsive}>
+    <section className="mb-20 md:w-[80%] px-4 mx-auto">
+      <div className="mb-8 text-center">
+        <p className="text-sm text-gray-500">TOP CITIES</p>
+        <h2 className="text-2xl font-bold text-gray-900">
+          Explore Real Estate in Popular Indian Cities
+        </h2>
+      </div>
+      <Carousel responsive={responsive} className="mb-8">
         {citiesList.map((city, index) => (
-          <Box key={index}>
-            <Card src={city.src1} text1={city.text1} text2={city.text2} />
-            {index !== 3 && (
-              <Card src={city.src2} text1={city.text3} text2={city.text4} />
+          <div key={index} className="px-4">
+            <Card src={city.src1} title={city.text1} subtitle={city.text2} />
+            {city.src2 && (
+              <Card src={city.src2} title={city.text3} subtitle={city.text4} />
             )}
-          </Box>
+          </div>
         ))}
       </Carousel>
-      <Box
-        sx={{
-          mt: 3,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <LightTypography text={"COMMERCIAL SPACES"} />
-        <DarkTypography
-          text1={"Choose from a wide variety of"}
-          text2={"commercial properties"}
-        />
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          mt: 3,
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 3,
-        }}
-      >
+      <div className="text-center mt-12">
+        <p className="text-sm text-gray-500">COMMERCIAL SPACES</p>
+        <h2 className="text-2xl font-bold text-gray-900">
+          Choose from a wide variety of commercial properties
+        </h2>
+      </div>
+      <div className="flex flex-col md:flex-row gap-6 justify-center mt-8">
         <CommercialCard
-          bgColor="#fff5e4"
+          bgColor="bg-yellow-100"
           lightText="BUY FOR COMMERCIAL USE"
-          titleText1="Buy a Commercial"
-          titleText2="property"
-          subline1="Explore from Office Spaces, Co-working spaces,"
-          subline2="Retail Shops, Land, Factories and more"
+          title1="Buy a Commercial"
+          title2="property"
+          subtitle1="Explore from Office Spaces, Co-working spaces,"
+          subtitle2="Retail Shops, Land, Factories and more"
           btnText="Explore Buying Commercial"
         />
         <CommercialCard
-          bgColor="#F0F9FF"
+          bgColor="bg-blue-100"
           lightText="LEASE FOR COMMERCIAL USE"
-          titleText1="Lease a Commercial"
-          titleText2="property"
-          subline1="Explore from Office Spaces, Co-working spaces,"
-          subline2="Retail Shops, Land, Factories and more"
+          title1="Lease a Commercial"
+          title2="property"
+          subtitle1="Explore from Office Spaces, Co-working spaces,"
+          subtitle2="Retail Shops, Land, Factories and more"
           btnText="Explore Leasing Commercial"
         />
-      </Box>
-      <Box
-        sx={{
-          mt: 5,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <LightTypography text={"BENEFITS OF Property Wallah"} />
-        <DarkTypography text1={"Why choose Property Wallah"} />
-      </Box>
-      <Grid container spacing={4} sx={{ display: "flex", mt: 4 }}>
-        <Grid item md={4}>
-          <WhyChoose
-            text1="Over 12 Lac properties"
-            text2="10,000+ properties are added every day"
-          />
-        </Grid>
-        <Grid item md={4}>
-          <WhyChoose
-            text1="Verification by Property Wallah team"
-            text2="Photos / Videos and other details are verified on location"
-          />
-        </Grid>
-        <Grid item md={4}>
-          <WhyChoose
-            text1="Large user base"
-            text2="High active user count and user engagement to find and close deals"
-          />
-        </Grid>
-      </Grid>
-
-    </Container>
+      </div>
+      <div className="text-center mt-12">
+        <p className="text-sm text-gray-500">BENEFITS OF Property Wallah</p>
+        <h2 className="text-2xl font-bold text-gray-900">
+          Why choose Property Wallah
+        </h2>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        <WhyChoose
+          title="Over 12 Lac properties"
+          subtitle="10,000+ properties are added every day"
+        />
+        <WhyChoose
+          title="Verification by Property Wallah team"
+          subtitle="Photos / Videos and other details are verified on location"
+        />
+        <WhyChoose
+          title="Large user base"
+          subtitle="High active user count and user engagement to find and close deals"
+        />
+      </div>
+    </section>
   );
 };
 

@@ -1,217 +1,85 @@
 import React from "react";
-import "./Footer.css";
 import { useNavigate } from "react-router";
 import { Facebook, Instagram, Twitter, YouTube } from "@mui/icons-material";
 
 const Footer = () => {
   const navigate = useNavigate();
   return (
-    <div className="div-footer">
-      <div className="div-footer-2">
-        <div className="div-footer-3">
-          <div className="list">
-            <div className="text-wrapper-46">Property Wallah</div>
-            <div className="text-wrapper-48">Mobile Apps</div>
-            <div className="text-wrapper-48">Our Services</div>
-            <div className="text-wrapper-48">Post your Property</div>
-            <div className="text-wrapper-48">Builders in India</div>
-            <div className="text-wrapper-48">Articles</div>
-            <div className="text-wrapper-48">Customer Service</div>
-            <div className="text-wrapper-48">Sitemap</div>
+    <div className="flex flex-col items-start bg-[#151c22] overflow-hidden  w-full ">
+      <div className="md:flex md:justify-around justify-between gap-4 w-full p-8">
+        <div className="flex flex-row flex-wrap gap-4 md:w-[60%] justify-between">
+          <div className="flex flex-col gap-4">
+            <div className="text-white font-bold text-lg mb-2">Property Wallah</div>
+            <div className="text-white font-medium text-base">Mobile Apps</div>
+            <div className="text-white font-medium text-base">Our Services</div>
+            <div className="text-white font-medium text-base">Post your Property</div>
+            <div className="text-white font-medium text-base">Builders in India</div>
+            <div className="text-white font-medium text-base">Articles</div>
+            <div className="text-white font-medium text-base">Customer Service</div>
+            <div className="text-white font-medium text-base">Sitemap</div>
           </div>
 
-          <div className="list">
-            <div className="text-wrapper-46">Company</div>
-            <div
-              className="text-wrapper-48 clicky"
-              onClick={() => navigate("/aboutus")}
-            >
+          <div className="flex flex-col gap-4">
+            <div className="text-white font-bold text-lg mb-2">Company</div>
+            <div className="text-white font-medium text-base cursor-pointer" onClick={() => navigate("/aboutus")}>
               About us
             </div>
-            <div
-              className="text-wrapper-48 clicky"
-              onClick={() => navigate("/contactus")}
-            >
+            <div className="text-white font-medium text-base cursor-pointer" onClick={() => navigate("/contactus")}>
               Contact us
             </div>
-            <div className="text-wrapper-48">Careers with us</div>
-            <div className="text-wrapper-48">Terms & Conditions</div>
-            <div className="text-wrapper-48">Request Info</div>
-            <div className="text-wrapper-48">Feedback</div>
-            <div className="text-wrapper-48">Report a problem</div>
-            <div className="text-wrapper-48">Testimonials</div>
-            <div className="text-wrapper-48">Privacy Policy</div>
-          
+            <div className="text-white font-medium text-base">Careers with us</div>
+            <div className="text-white font-medium text-base">Terms & Conditions</div>
+            <div className="text-white font-medium text-base">Request Info</div>
+            <div className="text-white font-medium text-base">Feedback</div>
+            <div className="text-white font-medium text-base">Report a problem</div>
+            <div className="text-white font-medium text-base">Testimonials</div>
+            <div className="text-white font-medium text-base">Privacy Policy</div>
           </div>
 
-          <div className="list">
-            <div className="text-wrapper-46">Our Partners</div>
-            <div className="div-wrapper-2a">
-              <a href="https://www.vigya.in/" target="_blank">
-                <p className="text-wrapper-48">Vigya.in - For IT Services And Solutions</p>
+          <div className="flex flex-col gap-4">
+            <div className="text-white font-bold text-lg mb-2">Our Partners</div>
+            <div className="flex flex-col gap-4">
+              <a href="https://www.vigya.in/" target="_blank" className="text-white font-medium text-base">
+                Vigya.in - For IT Services And Solutions
               </a>
-            </div><div className="div-wrapper-2a">
-              <a href="https://www.aanganconnect.in/" target="_blank">
-                <p className="text-wrapper-48">Aangan Connect - For Your Smart Society</p>
-              </a>
-            </div>
-            {/* <div className="div-wrapper-2">
-              <a href="https://www.naukrigulf.com/" target="_blank">
-                <p className="text-wrapper-51">
-                  Naukrigulf.com - Jobs in
-                  <br />
-                  middle east
-                </p>
+              <a href="https://www.aanganconnect.in/" target="_blank" className="text-white font-medium text-base">
+                Aangan Connect - For Your Smart Society
               </a>
             </div>
-            <div className="div-wrapper-2">
-              <a
-                href="https://www.jeevansathi.com/m0/homepage/index"
-                target="_blank"
-              >
-                <p className="text-wrapper-51">
-                  Jeevansathi.com -<br />
-                  Matrimonials
-                </p>
-              </a>
-            </div>
-            <div className="div-wrapper-2">
-              <a href="https://www.brijj.com/" target="_blank">
-                <p className="text-wrapper-51">
-                  Brijj.com - Professional
-                  <br />
-                  Networking
-                </p>
-              </a>
-            </div>
-            <div className="div-wrapper-2">
-              <a href="https://www.shiksha.com/" target="_blank">
-                <p className="text-wrapper-51">
-                  Shiksha.com - Education
-                  <br />
-                  Career Info
-                </p>
-              </a>
-            </div>
-            <div className="div-wrapper-2">
-              <a href="https://www.policybazaar.com/" target="_blank">
-                <p className="text-wrapper-51">
-                  Policybazaar.com -<br />
-                  Insurance India
-                </p>
-              </a>
-            </div>
-            <div className="div-wrapper-2">
-              <a href="https://www.meritnation.com/" target="_blank">
-                <p className="text-wrapper-51">
-                  Meritnation.com - Online
-                  <br />
-                  Educational Assessment
-                </p>
-              </a>
-            </div>
-            <div className="div-wrapper-2a">
-              <a href="https://www.paisabazaar.com/" target="_blank">
-                <p className="text-wrapper-51">PaisaBazaar.com</p>
-              </a>
-            </div>
-            <div className="div-wrapper-2a">
-              <a href="https://www.ambitionbox.com/" target="_blank">
-                <p className="text-wrapper-51">AmbitionBox.com</p>
-              </a>
-            </div>
-            <div className="div-wrapper-2">
-              <a href="https://www.firstnaukri.com/" target="_blank">
-                <p className="text-wrapper-51">
-                  FirstNaukri.com - A jobsite
-                  <br />
-                  for campus hiring
-                </p>
-              </a>
-            </div>
-            <div className="div-wrapper-2">
-              <a href="https://www.jobhai.com/" target="_blank">
-                <p className="text-wrapper-51">
-                  Jobhai.com – Find Jobs Near
-                  <br />
-                  You
-                </p>
-              </a>
-            </div>
-            <div className="div-wrapper-2">
-              <a href="https://techminis.com/" target="_blank">
-                <p className="text-wrapper-51">
-                  Techminis.com –Tech news
-                  <br />
-                  on the go
-                </p>
-              </a>
-            </div> */}
           </div>
         </div>
 
-        <div className="list-2">
-          <div className="text-wrapper-46">Contact Us</div>
+        <div className="flex flex-col md:w-[40%] ">
+          <div className="text-white font-bold text-lg mb-2">Contact Us</div>
+          <p className="text-white font-medium text-base">+919664265932 </p>
+          <p className="text-white font-normal text-sm opacity-70 mt-1">Monday - Saturday (9:00Am to 7:00PM IST)</p>
+          <div className="text-white font-normal text-xs mt-6">Email - bahadurdangi100@gmail.com </div>
+          <div className="text-white font-bold text-lg mt-6">Connect with us</div>
 
-          <p className="text-wrapper-52">Toll Free - 1800 41 99099</p>
-          <p className="text-wrapper-53">
-            Monday - Saturday (9:00Am to 7:00PM IST)
-          </p>
-          <div className="text-wrapper-54">Email - feedback@Property Wallah.com</div>
-          <div className="text-wrapper-55">Connect with us</div>
-
-          <div className="overlap-8">
-            <div className="div-footer-5 text-white text-3xl">
-              <div>
-                <a href="https://www.facebook.com/Property Wallah/" target="_blank">
-                <Facebook/>
-                </a>
-              </div>
-
-              <div>
-                <a
-                  href="https://www.youtube.com/user/Property Wallahindia"
-                  target="_blank"
-                >
-                    <YouTube/>
-                </a>
-              </div>
-              <div>
-                <a href="https://twitter.com/Property WallahIndia" target="_blank">
-                <Twitter/>
-                </a>
-              </div>
-              <div>
-                <a
-                  href="https://www.instagram.com/Property Wallahindia/"
-                  target="_blank"
-                >
-                  <Instagram/>
-                </a>
-              </div>
-            </div>
+          <div className="flex gap-4 mt-4">
+            <a href="https://www.facebook.com/PropertyWallah/" target="_blank" className="text-white text-3xl">
+              <Facebook />
+            </a>
+            <a href="https://www.youtube.com/user/PropertyWallahindia" target="_blank" className="text-white text-3xl">
+              <YouTube />
+            </a>
+            <a href="https://twitter.com/PropertyWallahIndia" target="_blank" className="text-white text-3xl">
+              <Twitter />
+            </a>
+            <a href="https://www.instagram.com/PropertyWallahindia/" target="_blank" className="text-white text-3xl">
+              <Instagram />
+            </a>
           </div>
 
-          <div className="p-caption-subdued">
-            <p className="text-wrapper-57">
-              *Usage of Property Wallah.com to upload content showing area in non
-              standard units or
-              <br />
-              which enables targeting by religion/community/caste/race is
-              prohibited. Please
-              <br />
-              report inappropriate content by writing to us at
-              <span className="link-report-abuse">report abuse</span>
-            </p>
+          <div className="text-white text-xs opacity-50 mt-4">
+            *Usage of propertywallah.org to upload content showing area in non standard units or which enables targeting by religion/community/caste/race is prohibited. Please report inappropriate content by writing to us at <span className="text-blue-500 font-medium">report abuse</span>
           </div>
 
-          <p className="all-rights-reserved">
-            All trademarks are the property of their
-            <br />
-            respective owners.
+          <p className="text-white font-medium text-base mt-4">
+            All trademarks are the property of their respective owners.
           </p>
 
-          <p className="all-rights-reserved">
+          <p className="text-white font-medium text-base mt-4">
             All rights reserved - Vigya.in
           </p>
         </div>

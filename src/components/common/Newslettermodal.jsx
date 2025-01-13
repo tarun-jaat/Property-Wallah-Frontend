@@ -7,7 +7,7 @@ const NewsletterModal = () => {
     // Open modal after 1 minute (60000ms)
     const timer = setTimeout(() => {
       setIsOpen(true);
-    }, 1000);
+    }, 20000);
 
     // Cleanup timer on component unmount
     return () => clearTimeout(timer);
@@ -16,16 +16,16 @@ const NewsletterModal = () => {
   return (
     <>
       {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="bg-white relative rounded-lg flex items-center justify-between p-8 max-w-fit w-full shadow-lg">
+        <div className="fixed inset-0 flex md:flex-row flex-col items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white relative rounded-lg flex md:flex-row flex-col items-center justify-between p-8 max-w-fit w-full shadow-lg">
             <img
               src={subscribe}
               alt="Newsletter Illustration"
               className="w-1/2 mx-auto"
             />
-            <div className="flex flex-col items-start space-y-4">
+            <div className="flex flex-col items-start md:space-y-4">
             <p className="text-gray-600  text-center">Stay up to date</p>
-              <h2 className="text-xl font-bold text-gray-800">
+              <h2 className="md:text-xl font-bold text-gray-800">
                 You’re probably thinking, “Another newsletter?”
                 <br />
                 But we promise, you’re going to love ours!
@@ -46,7 +46,7 @@ const NewsletterModal = () => {
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-sm absolute left-1/2 bottom-4 text-gray-500 mt-4"
+              className="text-sm absolute left-1/2 md:bottom-4 bottom-2 text-gray-500 mt-4"
             >
               Close
             </button>

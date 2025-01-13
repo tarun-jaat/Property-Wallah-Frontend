@@ -24,7 +24,7 @@ function RenderSteps() {
       {step === 8 && <AmenitiesSection />}
       {step === 9 && <OtherDetails />}
     </div>
-  );
+  ); 
 }
 
 export default RenderSteps;

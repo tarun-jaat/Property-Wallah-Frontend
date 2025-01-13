@@ -71,10 +71,10 @@ const SearchBox = () => {
   return (
     <Paper
       elevation={5}
+      className="md:w-[60%] w-[100%]"
       sx={{
         background: "#fff",
         borderRadius: "15px",
-        width: "60%",
         position: "absolute",
         bottom: 0,
         padding: "16px 0 0",
@@ -85,7 +85,11 @@ const SearchBox = () => {
         sx={{
           display: "flex",
           justifyContent: "space-around",
-          padding: "0 16px",
+          gap: "20px",
+          alignItems: "center",
+          padding: "16px 0 0",
+          mx:4,
+          overflowY: "auto",
         }}
       >
         {optionButtons.map((btn, index) => (
@@ -96,7 +100,6 @@ const SearchBox = () => {
             sx={{
               textTransform: "capitalize",
               color: searchOption === btn ? "#000" : "#42526E",
-              fontSize: "16px",
               fontWeight: 600,
               borderBottom: searchOption === btn ? "3px solid #005CA8" : "3px solid transparent",
               borderRadius: 0,

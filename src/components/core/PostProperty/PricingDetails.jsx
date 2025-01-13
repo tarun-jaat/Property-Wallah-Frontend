@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { incrementStep, saveFormData, resetForm } from '../../../Redux/FormDataSlice.js';
 
 export default function PricingDetails() {
@@ -15,13 +15,15 @@ export default function PricingDetails() {
       additionalRentDetails: {
         maintenance: '',
         bookingAmount: '',
-        membershipCharges: '',
+        membershipCharges: '',  
         otherCharges: '',
       },
     },
   });
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
+  const { step } = useSelector((state) => state.formData);
+  const currentStep = step;
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -79,180 +81,217 @@ export default function PricingDetails() {
   return (
     <div className="min-h-screen mt-24 p-4 md:p-6 lg:p-8">
       <div className="mx-auto max-w-6xl bg-white rounded-lg shadow-sm p-6">
-        <div className="space-y-8">
-          <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Pricing Details</h1>
-            <p className="text-lg text-gray-600">Provide the pricing details for your property</p>
+        <div className="grid md:grid-cols-[300px,1fr] gap-8">
+          {/* Progress Sidebar */}
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <div className="space-y-6">
+              {["Basic Details", "Location Details", "Property Profile", "Photos, Videos & Voice-over", "Amenities Section"].map((step, index) => (
+                <div key={step} className="relative flex items-start gap-4">
+                  <div className="flex flex-col items-center">
+                    <div
+                      className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                        currentStep > index + 1 ? "bg-green-600" : currentStep === index + 1 ? "bg-blue-600" : "bg-gray-200"
+                      }`}
+                    >
+                      {currentStep > index + 1 ? (
+                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                      ) : (
+                        <span
+                          className={`w-2 h-2 rounded-full ${
+                            currentStep === index + 1 ? "bg-white" : "bg-gray-400"
+                          }`}
+                        />
+                      )}
+                    </div>
+                    {index < 4 && <div className="w-0.5 h-full bg-gray-200" />}
+                  </div>
+                  <div>
+                    <p className={`text-sm ${currentStep === index + 1 ? "text-blue-600 font-medium" : "text-gray-600"}`}>{step}</p>
+                    <span className="text-xs text-gray-400">Step {index + 1}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label htmlFor="expectedRent" className="block text-sm font-medium text-gray-700">Expected Rent</label>
-                <input
-                  type="number"
-                  id="expectedRent"
-                  name="expectedRent"
-                  value={formData.rentDetails.expectedRent}
-                  onChange={handleChange}
-                  placeholder="Enter expected rent"
-                  className={`w-full px-3 py-2 border ${errors.expectedRent ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
-                />
-                {errors.expectedRent && <p className="text-red-500 text-sm">{errors.expectedRent}</p>}
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="securityDeposit" className="block text-sm font-medium text-gray-700">Security Deposit</label>
-                <input
-                  type="number"
-                  id="securityDeposit"
-                  name="securityDeposit"
-                  value={formData.rentDetails.securityDeposit}
-                  onChange={handleChange}
-                  placeholder="Enter security deposit"
-                  className={`w-full px-3 py-2 border ${errors.securityDeposit ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
-                />
-                {errors.securityDeposit && <p className="text-red-500 text-sm">{errors.securityDeposit}</p>}
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="agreementDurationMonths" className="block text-sm font-medium text-gray-700">Agreement Duration (Months)</label>
-                <input
-                  type="number"
-                  id="agreementDurationMonths"
-                  name="agreementDurationMonths"
-                  value={formData.rentDetails.agreementDurationMonths}
-                  onChange={handleChange}
-                  placeholder="Enter agreement duration"
-                  className={`w-full px-3 py-2 border ${errors.agreementDurationMonths ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
-                />
-                {errors.agreementDurationMonths && <p className="text-red-500 text-sm">{errors.agreementDurationMonths}</p>}
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="noticePeriodMonths" className="block text-sm font-medium text-gray-700">Notice Period (Months)</label>
-                <input
-                  type="number"
-                  id="noticePeriodMonths"
-                  name="noticePeriodMonths"
-                  value={formData.rentDetails.noticePeriodMonths}
-                  onChange={handleChange}
-                  placeholder="Enter notice period"
-                  className={`w-full px-3 py-2 border ${errors.noticePeriodMonths ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
-                />
-                {errors.noticePeriodMonths && <p className="text-red-500 text-sm">{errors.noticePeriodMonths}</p>}
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="isNegotiable" className="block text-sm font-medium text-gray-700">Is Rent Negotiable?</label>
-                <input
-                  type="checkbox"
-                  id="isNegotiable"
-                  name="isNegotiable"
-                  checked={formData.rentDetails.isNegotiable}
-                  onChange={handleChange}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="electricityCharges" className="block text-sm font-medium text-gray-700">Electricity Charges Included?</label>
-                <input
-                  type="checkbox"
-                  id="electricityCharges"
-                  name="electricityCharges"
-                  checked={formData.rentDetails.electricityCharges}
-                  onChange={handleChange}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="waterCharges" className="block text-sm font-medium text-gray-700">Water Charges Included?</label>
-                <input
-                  type="checkbox"
-                  id="waterCharges"
-                  name="waterCharges"
-                  checked={formData.rentDetails.waterCharges}
-                  onChange={handleChange}
-                  className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-              </div>
+          {/* Main Content */}
+          <div className="space-y-8">
+            <div>
+              <h1 className="text-2xl font-semibold text-gray-900">Pricing Details</h1>
+              <p className="text-lg text-gray-600">Provide the pricing details for your property</p>
             </div>
 
-            <div className="space-y-6">
-              <h3 className="text-lg font-medium text-gray-900">Additional Rent Details</h3>
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label htmlFor="maintenance" className="block text-sm font-medium text-gray-700">Maintenance</label>
+                  <label htmlFor="expectedRent" className="block text-sm font-medium text-gray-700">Expected Rent</label>
                   <input
                     type="number"
-                    id="maintenance"
-                    name="additionalRentDetails.maintenance"
-                    value={formData.rentDetails.additionalRentDetails.maintenance}
+                    id="expectedRent"
+                    name="expectedRent"
+                    value={formData.rentDetails.expectedRent}
                     onChange={handleChange}
-                    placeholder="Enter maintenance charges"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Enter expected rent"
+                    className={`w-full px-3 py-2 border ${errors.expectedRent ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
+                  />
+                  {errors.expectedRent && <p className="text-red-500 text-sm">{errors.expectedRent}</p>}
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="securityDeposit" className="block text-sm font-medium text-gray-700">Security Deposit</label>
+                  <input
+                    type="number"
+                    id="securityDeposit"
+                    name="securityDeposit"
+                    value={formData.rentDetails.securityDeposit}
+                    onChange={handleChange}
+                    placeholder="Enter security deposit"
+                    className={`w-full px-3 py-2 border ${errors.securityDeposit ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
+                  />
+                  {errors.securityDeposit && <p className="text-red-500 text-sm">{errors.securityDeposit}</p>}
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="agreementDurationMonths" className="block text-sm font-medium text-gray-700">Agreement Duration (Months)</label>
+                  <input
+                    type="number"
+                    id="agreementDurationMonths"
+                    name="agreementDurationMonths"
+                    value={formData.rentDetails.agreementDurationMonths}
+                    onChange={handleChange}
+                    placeholder="Enter agreement duration"
+                    className={`w-full px-3 py-2 border ${errors.agreementDurationMonths ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
+                  />
+                  {errors.agreementDurationMonths && <p className="text-red-500 text-sm">{errors.agreementDurationMonths}</p>}
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="noticePeriodMonths" className="block text-sm font-medium text-gray-700">Notice Period (Months)</label>
+                  <input
+                    type="number"
+                    id="noticePeriodMonths"
+                    name="noticePeriodMonths"
+                    value={formData.rentDetails.noticePeriodMonths}
+                    onChange={handleChange}
+                    placeholder="Enter notice period"
+                    className={`w-full px-3 py-2 border ${errors.noticePeriodMonths ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
+                  />
+                  {errors.noticePeriodMonths && <p className="text-red-500 text-sm">{errors.noticePeriodMonths}</p>}
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="isNegotiable" className="block text-sm font-medium text-gray-700">Is Rent Negotiable?</label>
+                  <input
+                    type="checkbox"
+                    id="isNegotiable"
+                    name="isNegotiable"
+                    checked={formData.rentDetails.isNegotiable}
+                    onChange={handleChange}
+                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="bookingAmount" className="block text-sm font-medium text-gray-700">Booking Amount</label>
+                  <label htmlFor="electricityCharges" className="block text-sm font-medium text-gray-700">Electricity Charges Included?</label>
                   <input
-                    type="number"
-                    id="bookingAmount"
-                    name="additionalRentDetails.bookingAmount"
-                    value={formData.rentDetails.additionalRentDetails.bookingAmount}
+                    type="checkbox"
+                    id="electricityCharges"
+                    name="electricityCharges"
+                    checked={formData.rentDetails.electricityCharges}
                     onChange={handleChange}
-                    placeholder="Enter booking amount"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="membershipCharges" className="block text-sm font-medium text-gray-700">Membership Charges</label>
+                  <label htmlFor="waterCharges" className="block text-sm font-medium text-gray-700">Water Charges Included?</label>
                   <input
-                    type="number"
-                    id="membershipCharges"
-                    name="additionalRentDetails.membershipCharges"
-                    value={formData.rentDetails.additionalRentDetails.membershipCharges}
+                    type="checkbox"
+                    id="waterCharges"
+                    name="waterCharges"
+                    checked={formData.rentDetails.waterCharges}
                     onChange={handleChange}
-                    placeholder="Enter membership charges"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="otherCharges" className="block text-sm font-medium text-gray-700">Other Charges</label>
-                  <input
-                    type="text"
-                    id="otherCharges"
-                    name="additionalRentDetails.otherCharges"
-                    value={formData.rentDetails.additionalRentDetails.otherCharges}
-                    onChange={handleChange}
-                    placeholder="Enter other charges"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                   />
                 </div>
               </div>
-            </div>
 
-            <div className="flex gap-4">
-              <button
-                type="submit"
-                className="w-full sm:w-auto px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                Continue
-              </button>
-              <button
-                type="button"
-                onClick={handleCancel}
-                className="w-full sm:w-auto px-8 py-3 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
+              <div className="space-y-6">
+                <h3 className="text-lg font-medium text-gray-900">Additional Rent Details</h3>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label htmlFor="maintenance" className="block text-sm font-medium text-gray-700">Maintenance</label>
+                    <input
+                      type="number"
+                      id="maintenance"
+                      name="additionalRentDetails.maintenance"
+                      value={formData.rentDetails.additionalRentDetails.maintenance}
+                      onChange={handleChange}
+                      placeholder="Enter maintenance charges"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="bookingAmount" className="block text-sm font-medium text-gray-700">Booking Amount</label>
+                    <input
+                      type="number"
+                      id="bookingAmount"
+                      name="additionalRentDetails.bookingAmount"
+                      value={formData.rentDetails.additionalRentDetails.bookingAmount}
+                      onChange={handleChange}
+                      placeholder="Enter booking amount"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="membershipCharges" className="block text-sm font-medium text-gray-700">Membership Charges</label>
+                    <input
+                      type="number"
+                      id="membershipCharges"
+                      name="additionalRentDetails.membershipCharges"
+                      value={formData.rentDetails.additionalRentDetails.membershipCharges}
+                      onChange={handleChange}
+                      placeholder="Enter membership charges"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="otherCharges" className="block text-sm font-medium text-gray-700">Other Charges</label>
+                    <input
+                      type="text"
+                      id="otherCharges"
+                      name="additionalRentDetails.otherCharges"
+                      value={formData.rentDetails.additionalRentDetails.otherCharges}
+                      onChange={handleChange}
+                      placeholder="Enter other charges"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <button
+                  type="submit"
+                  className="w-full sm:w-auto px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Continue
+                </button>
+                <button
+                  type="button"
+                  onClick={handleCancel}
+                  className="w-full sm:w-auto px-8 py-3 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

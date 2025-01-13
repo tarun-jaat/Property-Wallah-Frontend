@@ -28,6 +28,7 @@ function Home() {
           position: "relative",
           display: "flex",
           justifyContent: "center",
+          mx: "auto",
           minHeight: "55vh",
           width: "100",
         }}
@@ -59,7 +60,7 @@ function Home() {
         )}
       </div>
       <PropertyInsights />
-      <div className="mt-4 pt-7 w-full overflow-hidden flex items-center justify-center backgroundTexture">
+      <div className="md:mt-4 mt-14 pt-16 w-full overflow-hidden flex items-center justify-center backgroundTexture">
         <HomesByFurnishing />
       </div>
       <div className="mt-4 pt-7 overflow-hidden flex items-center justify-center backgroundTexture">

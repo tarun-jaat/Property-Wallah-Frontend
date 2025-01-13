@@ -73,7 +73,7 @@ export default function PostPropertyUser() {
                     </ul>
                     <div className="flex justify-center md:w-[800px]">
                         <img src="https://static.99acres.com/universalapp/img/Desktop_Animation_compress.gif" alt="Property listing illustration" className="w-full max-w-md" />
-                    </div>
+                    </div> 
                 </div>
 
                 {/* Right section */}

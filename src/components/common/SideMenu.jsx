@@ -67,11 +67,11 @@ function SideMenu({ open, onClose }) {
 
   return (
     <CSSTransition in={open} timeout={500} classNames="slide" unmountOnExit>
-      <div className="w-[300px] fixed shadow-xl overflow-hidden top-16 h-[92vh] right-0 rounded-l-lg bg-white">
+      <div className="md:w-[300px] w-full fixed shadow-xl overflow-hidden top-16 h-[92vh] right-0 rounded-l-lg bg-white">
         <div className="flex relative flex-col">
           <button
             onClick={onClose}
-            className="text-gray-500 absolute top-2 right-4 hover:text-gray-800"
+            className="text-gray-500 absolute top-0 right-4 p-3 hover:text-gray-800"
           >
             &#x2715;
           </button>

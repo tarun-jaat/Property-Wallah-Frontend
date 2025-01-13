@@ -147,3 +147,15 @@ border: 1px solid rgba( 255, 255, 255, 0.85 );
   color: #333;
   margin-bottom: 10px;
 }
+/* Add this to your CSS file */
+
+@media only screen and (max-width: 768px) {
+  .MuiTextField-root {
+    width: 100%;
+  }
+  .MuiTextField-root:focus {
+    width: 90vw;
+    position: relative;
+    z-index: 1;
+  }
+}

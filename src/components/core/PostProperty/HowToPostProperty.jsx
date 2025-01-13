@@ -132,7 +132,7 @@ export default function HowToPostProperty() {
                     {item.number}.
                   </span>
                   <span className="text-black font-semibold text-lg">
-                    {item.title}
+                    {item.title} 
                   </span>
                 </h3>
                 <p className="text-gray-500 text-sm leading-relaxed">

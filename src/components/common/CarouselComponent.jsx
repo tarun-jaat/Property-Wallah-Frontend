@@ -57,7 +57,7 @@ const CarouselComponent = () => {
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 1,
+      items: 2,
     },
   };
 
@@ -71,6 +71,7 @@ const CarouselComponent = () => {
             alt="carouselPhoto"
             style={{
               maxWidth: "180px",
+              marginRight:'20px',
               cursor: "pointer",
             }}
           />
