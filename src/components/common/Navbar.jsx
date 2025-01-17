@@ -111,8 +111,9 @@ export const Navbar = ({ openModal, isHome = false }) => {
       </div>
 
       {(scrolled || isHome) && (
-        <div className="flex items-center h-[70%] space-x-4 pl-2 bg-white rounded-lg shadow-md w-[45%]">
+        <div className="md:flex hidden items-center  h-[70%] space-x-4 pl-2 bg-white rounded-lg shadow-md w-[45%]">
           <Button
+
             onClick={handlePropertyMenuClick}
             endIcon={<ExpandMoreIcon />}
             className="text-white px-4  rounded-l-lg"
@@ -121,19 +122,26 @@ export const Navbar = ({ openModal, isHome = false }) => {
           </Button>
 
           <TextField
-            fullWidth
-            placeholder="Enter Locality / Project / Society / Landmark"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton>
-                    <SearchIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            className="rounded-r-lg border-none hidden md:block" 
-            />
+  fullWidth
+  placeholder="Enter Locality / Project / Society / Landmark"
+  InputProps={{
+    endAdornment: (
+      <InputAdornment position="end">
+        <IconButton>
+          <SearchIcon />
+        </IconButton>
+      </InputAdornment>
+    ),
+    classes: {
+      input: "rounded-r-lg outline-none border-none",
+    }, 
+  }}
+  sx={{
+    display: { xs: "none", md: "block" }, 
+    borderRadius: "0.5rem", 
+  }}
+/>
+
 
           <Menu
             anchorEl={propertyMenuAnchorEl}

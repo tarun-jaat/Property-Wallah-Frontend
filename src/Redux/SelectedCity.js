@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  selectedCity: "All India", 
+  selectedCity: "All Over World", 
 };
 
 const selectedCitySlice = createSlice({
@@ -12,7 +12,7 @@ const selectedCitySlice = createSlice({
       state.selectedCity = action.payload; 
     },
     resetSelectedCity: (state) => {
-      state.selectedCity = "All India"; 
+      state.selectedCity = "All Over World"; 
     },
   },
 });

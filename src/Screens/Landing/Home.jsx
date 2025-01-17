@@ -50,21 +50,21 @@ function Home() {
       </Box>
       <GetStarted />
       <div className="mt-12 relative pt-7 w-full flex items-center justify-center bg-white">
-        {pwUser ? (
+        {/* {pwUser ? (
           <div className="flex flex-col w-full">
             <HandedProject />
-            <UpcomingProjects />{" "}
+            <UpcomingProjects />
           </div>
-        ) : (
+        ) : ( */}
           <Recommend />
-        )}
       </div>
       <PropertyInsights />
       <div className="md:mt-4 mt-14 pt-16 w-full overflow-hidden flex items-center justify-center backgroundTexture">
         <HomesByFurnishing />
       </div>
       <div className="mt-4 pt-7 overflow-hidden flex items-center justify-center backgroundTexture">
-        {pwUser ? <NewlyLaunchedProjects /> : <MiddleSection />}
+        {/* {pwUser ? <NewlyLaunchedProjects /> : <MiddleSection />} */}
+        <MiddleSection />
       </div>
       <div className="mt-4 pt-7 overflow-hidden flex items-center justify-center backgroundTexture">
         <PropertySection />
