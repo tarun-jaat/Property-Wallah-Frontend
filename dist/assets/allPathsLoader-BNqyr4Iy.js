@@ -1,2 +1,0 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/index-2fKo5Gkd.js","assets/index-q-4Z3rai.css"])))=>i.map(i=>d[i]);
-import{_ as n,a as i,b as s}from"./index-2fKo5Gkd.js";var c=function(r,a){return n(void 0,void 0,void 0,function(){var t;return i(this,function(e){switch(e.label){case 0:return[4,s(()=>import("./index-2fKo5Gkd.js").then(o=>o.e),__vite__mapDeps([0,1]))];case 1:return t=e.sent().getIconPaths,[2,t(r,a)]}})})};export{c as allPathsLoader};
