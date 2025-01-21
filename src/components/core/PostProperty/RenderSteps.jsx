@@ -9,11 +9,13 @@ import PostPhotos from "./PostPhotos";
 import AmenitiesSection from "./AmenitiesSection";
 import OtherDetails from "./OtherDetails"; 
 import PricingDetails from "./PricingDetails";
+import StepsCounter from "./StepsCounter";
 
 function RenderSteps() {
   const { step } = useSelector((state) => state.formData); 
   return (
     <div>
+      <StepsCounter currentStep={step} />
       {step === 1 && <PostPropertyUser />}
       {step === 2 && <PostPropertyRegister />}
       {step === 3 && <PostPrimaryDetails />}
