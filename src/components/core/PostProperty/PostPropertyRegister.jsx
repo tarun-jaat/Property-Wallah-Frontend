@@ -16,7 +16,9 @@ export default function PostPropertyRegister() {
 
   return (
     <div className="flex pt-20 min-h-screen">
+      {/* <StepsCounter currentStep={currentStep} /> */}
       {/* Left Section */}
+      <div  className="md:flex w-full">
       <div className="flex-1 p-8 max-w-xl">
         <button 
           onClick={handleCancel} // Changed from navigate to handleCancel
@@ -43,7 +45,7 @@ export default function PostPropertyRegister() {
               onClick={() => setSelectedRole('owner')}
             >
               An Owner
-            </button>
+            </button> 
             
             <button
               className={`px-6 py-3 rounded-full border ${
@@ -95,8 +97,8 @@ export default function PostPropertyRegister() {
           <p>or call us at <span className="text-blue-600">+919664265932</span> (IND)</p>
         </div>
       </div>
+      </div>
     </div>
   );
 }
 
- 

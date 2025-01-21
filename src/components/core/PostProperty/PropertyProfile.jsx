@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { incrementStep, saveFormData, resetForm } from '../../../Redux/FormDataSlice.js';
+import StepsCounter from './StepsCounter';
 
 export default function PropertyProfile() {
   const [availabilityStatus, setAvailabilityStatus] = useState(''); 
   const [propertyScore, setPropertyScore] = useState(33)
-  const [currentStep, setCurrentStep] = useState(5)
+  const [currentStep, setCurrentStep] = useState(6)
   const [formData, setFormData] = useState({
     propertyProfile: {
       bedrooms: '',
@@ -17,7 +18,7 @@ export default function PropertyProfile() {
       facing: '',
       ageOfProperty: '',
       rentOutTo: '',
-
+      availabilityStatus: '', // Ensure this field is included in the initial state
     },
   });
   const [errors, setErrors] = useState({});
@@ -31,10 +32,10 @@ export default function PropertyProfile() {
       propertyProfile: {
         ...prevState.propertyProfile,
         [name]: value,
-        availabilityStatus: availabilityStatus,
       },
     }));
   };
+
   const validateForm = () => {
     const newErrors = {}
     if (!availabilityStatus) newErrors.availabilityStatus = 'Please select availability status';
@@ -54,7 +55,13 @@ export default function PropertyProfile() {
     e.preventDefault()
     const formErrors = validateForm()
     if (Object.keys(formErrors).length === 0) {
-      dispatch(saveFormData(formData));
+      dispatch(saveFormData({
+        ...formData,
+        propertyProfile: {
+          ...formData.propertyProfile,
+          availabilityStatus: availabilityStatus, // Ensure this field is included in the form data
+        },
+      }));
       dispatch(incrementStep());
     } else {
       setErrors(formErrors)
@@ -68,35 +75,8 @@ export default function PropertyProfile() {
   return (
     <div className="min-h-screen mt-24 p-4 md:p-6 lg:p-8">
       <div className="mx-auto max-w-6xl bg-white rounded-lg shadow-sm p-6">
-        <div className="grid md:grid-cols-[300px,1fr] gap-8">
-          {/* Progress Sidebar */}
-          <div className="bg-gray-50 p-6 rounded-lg">
-            <div className="space-y-6">
-              {["Basic Details", "Location Details", "Property Profile", "Photos, Videos & Voice-over", "Amenities Section"].map((step, index) => (
-                <div key={step} className="relative flex items-start gap-4">
-                  <div className="flex flex-col items-center">
-                    <div
-                      className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                        currentStep === index + 3 ? "bg-blue-600" : "bg-gray-200"
-                      }`}
-                    >
-                      <span
-                        className={`w-2 h-2 rounded-full ${
-                          currentStep === index + 3 ? "bg-white" : "bg-gray-400"
-                        }`}
-                      />
-                    </div>
-                    {index < 4 && <div className="w-0.5 h-full bg-gray-200" />}
-                  </div>
-                  <div>
-                    <p className={`text-sm ${currentStep === index + 3 ? "text-blue-600 font-medium" : "text-gray-600"}`}>{step}</p>
-                    <span className="text-xs text-gray-400">Step {index + 1}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
+        <div className=" gap-8">
+          <StepsCounter currentStep={currentStep} />
           {/* Main Content */}
           <div className="space-y-8">
             <div>
@@ -112,7 +92,7 @@ export default function PropertyProfile() {
                   <select
                     id="bedrooms"
                     name="bedrooms"
-                    value={formData.bedrooms}
+                    value={formData.propertyProfile.bedrooms}
                     onChange={handleChange}
                     className={`w-full px-3 py-2 border ${errors.bedrooms ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
                   >
@@ -130,7 +110,7 @@ export default function PropertyProfile() {
                   <select
                     id="bathrooms"
                     name="bathrooms"
-                    value={formData.bathrooms}
+                    value={formData.propertyProfile.bathrooms}
                     onChange={handleChange}
                     className={`w-full px-3 py-2 border ${errors.bathrooms ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
                   >
@@ -148,7 +128,7 @@ export default function PropertyProfile() {
                   <select
                     id="balconies"
                     name="balconies"
-                    value={formData.balconies}
+                    value={formData.propertyProfile.balconies}
                     onChange={handleChange}
                     className={`w-full px-3 py-2 border ${errors.balconies ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
                   >
@@ -158,7 +138,7 @@ export default function PropertyProfile() {
                     ))}
                   </select>
                   {errors.balconies && <p className="text-red-500 text-sm">{errors.balconies}</p>}
-                </div>
+                </div> 
 
                 {/* Total Floors */}
                 <div className="space-y-2">
@@ -167,7 +147,7 @@ export default function PropertyProfile() {
                     type="number"
                     id="totalFloors"
                     name="totalFloors"
-                    value={formData.totalFloors}
+                    value={formData.propertyProfile.totalFloors}
                     onChange={handleChange}
                     placeholder="Enter total floors"
                     className={`w-full px-3 py-2 border ${errors.totalFloors ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
@@ -182,7 +162,7 @@ export default function PropertyProfile() {
                     type="number"
                     id="floorNo"
                     name="floorNo"
-                    value={formData.floorNo}
+                    value={formData.propertyProfile.floorNo}
                     onChange={handleChange}
                     placeholder="Enter floor number"
                     className={`w-full px-3 py-2 border ${errors.floorNo ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
@@ -196,7 +176,7 @@ export default function PropertyProfile() {
                   <select
                     id="furnishing"
                     name="furnishing"
-                    value={formData.furnishing}
+                    value={formData.propertyProfile.furnishing}
                     onChange={handleChange}
                     className={`w-full px-3 py-2 border ${errors.furnishing ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
                   >
@@ -214,7 +194,7 @@ export default function PropertyProfile() {
                   <select
                     id="facing"
                     name="facing"
-                    value={formData.facing}
+                    value={formData.propertyProfile.facing}
                     onChange={handleChange}
                     className={`w-full px-3 py-2 border ${errors.facing ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
                   >
@@ -238,7 +218,7 @@ export default function PropertyProfile() {
                   <select
                     id="ageOfProperty"
                     name="ageOfProperty"
-                    value={formData.ageOfProperty}
+                    value={formData.propertyProfile.ageOfProperty}
                     onChange={handleChange}
                     className={`w-full px-3 py-2 border ${errors.ageOfProperty ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
                   >
@@ -258,7 +238,7 @@ export default function PropertyProfile() {
                   <select
                     id="rentOutTo"
                     name="rentOutTo"
-                    value={formData.rentOutTo}
+                    value={formData.propertyProfile.rentOutTo}
                     onChange={handleChange}
                     className={`w-full px-3 py-2 border ${errors.facing ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500`}
                   >

@@ -11,7 +11,7 @@ import OtherDetails from "./OtherDetails";
 import PricingDetails from "./PricingDetails";
 
 function RenderSteps() {
-  const { step } = useSelector((state) => state.formData);
+  const { step } = useSelector((state) => state.formData); 
   return (
     <div>
       {step === 1 && <PostPropertyUser />}

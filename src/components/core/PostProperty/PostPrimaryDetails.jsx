@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { incrementStep, saveFormData,resetStep } from "../../../Redux/FormDataSlice";
-
+import { incrementStep, saveFormData, resetStep } from "../../../Redux/FormDataSlice";
+import StepsCounter from "./StepsCounter";
 
 export default function PostPrimaryDetails() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [showError, setShowError] = useState(false);
-  const { step } = useSelector((state) => state.formData);
-    const { pwUser } = useSelector((state) => state.profile);
-    console.log(pwUser);
-  
-  const currentStep = step;
+  // const { step } = useSelector((state) => state.formData);
+  const { pwUser } = useSelector((state) => state.profile);
+  console.log(pwUser);
+
+  const currentStep = 1;
 
   const dispatch = useDispatch();
 
@@ -29,36 +29,8 @@ export default function PostPrimaryDetails() {
   return (
     <div className="min-h-screen w-full mt-24 p-4 md:p-6 lg:p-8 bg-gray-50">
       <div className="mx-auto max-w-6xl bg-white rounded-lg shadow-lg p-6">
-        <div className="grid md:grid-cols-[300px,1fr] gap-8">
-          {/* Progress Sidebar */}
-          <div className="bg-gray-50 p-6 rounded-lg">
-            <div className="space-y-6">
-              {["Basic Details", "Location Details", "Property Profile", "Photos, Videos & Voice-over", "Amenities Section"].map((step, index) => (
-                <div key={step} className="relative flex items-start gap-4">
-                  <div className="flex flex-col items-center">
-                    <div
-                      className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                        currentStep === index + 3 ? "bg-blue-600" : "bg-gray-200"
-                      }`}
-                    >
-                      <span
-                        className={`w-2 h-2 rounded-full ${
-                          currentStep === index + 3 ? "bg-white" : "bg-gray-400"
-                        }`}
-                      />
-                    </div>
-                    {index < 4 && <div className="w-0.5 h-full bg-gray-200" />}
-                  </div>
-                  <div>
-                    <p className={`text-sm ${currentStep === index + 3 ? "text-blue-600 font-medium" : "text-gray-600"}`}>{step}</p>
-                    <span className="text-xs text-gray-400">Step {index + 1}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-
+        <div className=" gap-8">
+          <StepsCounter currentStep={currentStep} />
           {/* Main Content */}
           <div className="space-y-8">
             <div>
@@ -106,7 +78,7 @@ export default function PostPrimaryDetails() {
             </div>
 
             {showError && <p className="text-red-500 text-sm">Please fill in all the required fields.</p>}
-
+ 
             {/* Continue Button */}
             <button
               onClick={handleContinue}

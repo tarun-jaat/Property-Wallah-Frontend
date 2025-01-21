@@ -37,6 +37,10 @@ export default function OtherDetails() {
     }));
   };
 
+  const getFilteredOptions = (currentFeature) => {
+    return featureOptions.filter(option => !Object.values(features).includes(option) || option === currentFeature);
+  };
+
   const handleSkip = () => {
     dispatch(incrementStep());
   };
@@ -106,7 +110,7 @@ export default function OtherDetails() {
                     onChange={(e) => handleFeatureChange(featureKey, e.target.value)}
                     className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   >
-                    {featureOptions.map(option => (
+                    {getFilteredOptions(features[featureKey]).map(option => (
                       <option key={option} value={option}>
                         {option}
                       </option>

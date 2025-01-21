@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { incrementStep, saveFormData, resetForm } from '../../../Redux/FormDataSlice.js';
+import StepsCounter from './StepsCounter';
 
 export default function PricingDetails() {
   const [formData, setFormData] = useState({
@@ -22,8 +23,7 @@ export default function PricingDetails() {
   });
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const { step } = useSelector((state) => state.formData);
-  const currentStep = step;
+  const currentStep = 5;
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -50,7 +50,7 @@ export default function PricingDetails() {
             [name]: fieldValue,
           },
         };
-      }
+      } 
     });
   };
 
@@ -81,41 +81,8 @@ export default function PricingDetails() {
   return (
     <div className="min-h-screen mt-24 p-4 md:p-6 lg:p-8">
       <div className="mx-auto max-w-6xl bg-white rounded-lg shadow-sm p-6">
-        <div className="grid md:grid-cols-[300px,1fr] gap-8">
-          {/* Progress Sidebar */}
-          <div className="bg-gray-50 p-6 rounded-lg">
-            <div className="space-y-6">
-              {["Basic Details", "Location Details", "Property Profile", "Photos, Videos & Voice-over", "Amenities Section"].map((step, index) => (
-                <div key={step} className="relative flex items-start gap-4">
-                  <div className="flex flex-col items-center">
-                    <div
-                      className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                        currentStep > index + 1 ? "bg-green-600" : currentStep === index + 1 ? "bg-blue-600" : "bg-gray-200"
-                      }`}
-                    >
-                      {currentStep > index + 1 ? (
-                        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                        </svg>
-                      ) : (
-                        <span
-                          className={`w-2 h-2 rounded-full ${
-                            currentStep === index + 1 ? "bg-white" : "bg-gray-400"
-                          }`}
-                        />
-                      )}
-                    </div>
-                    {index < 4 && <div className="w-0.5 h-full bg-gray-200" />}
-                  </div>
-                  <div>
-                    <p className={`text-sm ${currentStep === index + 1 ? "text-blue-600 font-medium" : "text-gray-600"}`}>{step}</p>
-                    <span className="text-xs text-gray-400">Step {index + 1}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
+        <div className=" gap-8">
+          <StepsCounter currentStep={currentStep} />
           {/* Main Content */}
           <div className="space-y-8">
             <div>
