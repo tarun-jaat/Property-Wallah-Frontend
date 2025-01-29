@@ -208,7 +208,7 @@ export const Navbar = ({ openModal, isHome = false }) => {
               <MenuItem sx={{ color: "#2c608a", fontSize: 12 }}>
                 My Properties
               </MenuItem>
-              <MenuItem sx={{ color: "#2c608a", fontSize: 12 }}>
+              <MenuItem onClick={()=>navigate(`/profile/${pwUser.id}/${pwUser.name}`)} sx={{ color: "#2c608a", fontSize: 12 }}>
                 Profile
               </MenuItem>
               <MenuItem sx={{ color: "#2c608a", fontSize: 12 }}>

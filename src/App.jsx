@@ -16,6 +16,7 @@ import SingleP from "./Screens/Landing/SingleP";
 import Plans from "./Screens/Plans";
 import TermsAndConditions from "./Screens/termsAndConditions";
 import PrivacyAndPolicy from "./Screens/PrivacyAndPolicy";
+import Profile from "./components/core/Profile/Profile";
 
 const PrivateRoute = ({ element }) => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -51,6 +52,7 @@ function App() {
           path="/post-property"
           element={<PrivateRoute element={<PostProperty />} />}
         />
+        <Route path='/profile/:id/:name' element={<PrivateRoute element={<Profile />} />} />
         <Route path="/properties" element={<Properties />} />
         <Route path="/properties/:propertyName/:propertyId" element={<SingleP />} />
         <Route path="/project-details/:projectName/:projectId" element={<PropertyCard />} />
