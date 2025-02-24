@@ -133,7 +133,7 @@ function SideMenu({ open, onClose }) {
           ))}
           <p className="text-sm text-gray-500 p-2">Quick Links</p>
           <Link
-            to="/about"
+            to="/info/about-us"
             className="flex p-2 px-4  items-center justify-between gap-2"
           >
             About Us <ArrowRight />
@@ -145,7 +145,7 @@ function SideMenu({ open, onClose }) {
             Help <ArrowRight />
           </Link>
           <Link
-            to="/contact"
+            to="/contact-us"
             className="flex p-2 px-4  items-center justify-between gap-2"
           >
             Contact Us <ArrowRight />

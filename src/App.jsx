@@ -17,6 +17,9 @@ import Plans from "./Screens/Plans";
 import TermsAndConditions from "./Screens/termsAndConditions";
 import PrivacyAndPolicy from "./Screens/PrivacyAndPolicy";
 import Profile from "./components/core/Profile/Profile";
+import PageReplica from "./Raplica"; // Import the new component
+import Aboutus from "./Screens/Aboutus";
+import Contactus from "./Screens/Contactus";
 
 const PrivateRoute = ({ element }) => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -61,6 +64,9 @@ function App() {
         <Route path="/plans" element={<Plans/>}/>
         <Route path="/info/privacy-policy" element={<PrivacyAndPolicy/>} />
         <Route path="/info/term-and-conditions" element={<TermsAndConditions/>} />  
+        <Route path="/info/about-us" element={<Aboutus/>} /> 
+        <Route path="/contact-us" element={<Contactus/>} /> 
+        <Route path="/page-replica.txt" element={<PageReplica />} /> 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </div>

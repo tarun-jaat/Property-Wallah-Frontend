@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Modal, Box, Button, TextField, Typography, IconButton, CircularProgress } from "@mui/material";
 import OtpInput from "react-otp-input";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import EditIcon from "@mui/icons-material/Edit";
 import { sendOtp, verifyOtp } from "../../../Services/Operations/AuthServices";
 
@@ -31,6 +31,16 @@ const LoginModal = ({ open, handleClose }) => {
   const [loading, setLoading] = useState(false);
   const [otpSubmitting, setOtpSubmitting] = useState(false);
   const [otpError, setOtpError] = useState(false);
+
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  const memoizedIsLoggedIn = useMemo(() => isLoggedIn, [isLoggedIn]);
+
+  useEffect(() => {
+    if (memoizedIsLoggedIn) {
+      handleClose();
+    }
+  }, [memoizedIsLoggedIn, handleClose]);
 
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
